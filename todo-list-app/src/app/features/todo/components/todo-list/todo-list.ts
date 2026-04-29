@@ -1,34 +1,36 @@
-import { Component } from '@angular/core';
-import { Todos } from '../../models/todo';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { Todo, Todos } from '../../models/todo';
 import { FormsModule } from '@angular/forms';
+import { TodoService } from '../../services/todo-service';
+import { EMPTY, filter, Observable, of } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-todo-list',
-  imports: [FormsModule],
+  imports: [FormsModule,AsyncPipe],
   templateUrl: './todo-list.html',
   styleUrl: './todo-list.css',
 })
-export class TodoList {
+export class TodoList implements OnInit {
 
-  readonly todos:Todos = [
-    {
-      userId: 1,
-      id: 1,
-      title: 'delectus aut autem',
-      completed: true,
-    },
-    {
-      userId: 1,
-      id: 2,
-      title: 'quis ut nam facilis et officia qui',
-      completed: false,
-    },
-    {
-      userId: 1,
-      id: 3,
-      title: 'fugiat veniam minus',
-      completed: false,
-    },
-  ];
+  // readonly todos$:Observable<Todos> = of([]);
+  todos$:Observable<Todos> = EMPTY;
+  todoService = inject(TodoService);
+  changeDetectorRef = inject(ChangeDetectorRef);
+
+  ngOnInit() {
+    this.todos$ = this.todoService.findAll()
+  }
+
+  deleteTodo(todo:Todo){
+    this.todoService.delete(todo).subscribe(()=>{
+      this.ngOnInit();
+      this.changeDetectorRef.detectChanges();
+    });
+  }
+
+  ngOnDestroy() {
+    // this.todos$.unsubscribe();
+  }
 
 }

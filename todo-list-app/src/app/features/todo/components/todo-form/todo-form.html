@@ -1,0 +1,31 @@
+<h3>todo-form works!</h3>
+<div class="col-4">
+  <div class="card">
+    <div class="card-body">
+
+      <form class="row g-3" (ngSubmit)="submit()" #todoForm="ngForm">
+        <div class="mb-3">
+          <label for="todoTitle" class="form-label">Title</label>
+          <input type="text" required #todoTitle="ngModel" class="form-control" id="todoTitle" name="todoTitle" [(ngModel)]="todoFormModel.title" aria-describedby="titleHelp" />
+          <div id="titleHelp" class="form-text">Todo title.</div>
+          @if(todoTitle.invalid && (todoTitle.dirty || todoTitle.touched)){
+            <div class="alert alert-danger" role="alert">
+              Title is required.
+            </div>
+          }
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="todoCompleted" name="todoCompleted" [(ngModel)]="todoFormModel.completed" />
+          <label class="form-check-label" for="todoCompleted">Completed</label>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="todoForm.invalid">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+<pre>
+todoTitle.valid: {{todoTitle.valid}}
+todoTitle.invalid: {{todoTitle.invalid}}
+</pre>
+
+{{todoFormModel | json}}
