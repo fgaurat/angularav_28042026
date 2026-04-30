@@ -1,0 +1,26 @@
+<h3>todo-reactive-form works!</h3>
+<div class="col-4">
+  <div class="card">
+    <div class="card-body">
+
+      <form [formGroup]="todoForm" class="row g-3" (ngSubmit)="submit()">
+        <div class="mb-3">
+          <label for="todoTitle" class="form-label">Title</label>
+          <input type="text" required formControlName="title" class="form-control" id="todoTitle" name="todoTitle" aria-describedby="titleHelp" />
+          <div id="titleHelp" class="form-text">Todo title.</div>
+          @if(isTitleValid){
+            <div class="alert alert-danger" role="alert">
+              Title is required.
+            </div>
+          }
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" formControlName="completed" class="form-check-input" id="todoCompleted" name="todoCompleted" />
+          <label class="form-check-label" for="todoCompleted">Completed</label>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="todoForm.invalid">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+

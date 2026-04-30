@@ -1,0 +1,10 @@
+<h1>{{ title() }}</h1>
+<h2>v3</h2>
+
+@if(todos.isLoading()){
+  <p>Loading...</p>
+}
+
+@if (todos.value()) {
+  {{todos.value() | json}}
+}

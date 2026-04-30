@@ -1,0 +1,23 @@
+<h1>{{title()}}</h1>
+{{title()}}
+
+<h2>{{count()}}</h2>
+<h3>{{doubleCount()}}</h3>
+<br>
+<button (click)="setTo12()">set to 12</button>
+<br>
+<button (click)="inc()">inc</button>
+
+
+<br>
+val1:{{val1()}}
+<br>
+val2:{{val2()}}
+<br>
+{{val1val2()}}
+<button (click)="inc_val1()">inc val1</button>
+<button (click)="inc_val2()">inc val2</button>
+<hr>
+
+<app-inc/>
+<app-show/>

@@ -1,0 +1,14 @@
+
+@url=http://0.0.0.0:3000
+
+GET {{url}}/todos
+
+
+###
+
+GET {{url}}/todos/1
+
+
+###
+
+DELETE {{url}}/todos/1
